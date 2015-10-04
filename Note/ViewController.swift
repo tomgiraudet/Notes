@@ -149,14 +149,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     func save() {
-        let managedContext = appDelegate.managedObjectContext!
-        var error: NSError?
-        if !managedContext.save(&error) {
-            println("Could not save \(error), \(error?.userInfo)")
+        let managedContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
+        //let managedContext = appDelegate.managedObjectContext!
+        //var error: NSError?
+        do {
+            try managedContext.save()
         }
+        catch{
+                print("Could not save") // \(error), \(error?.userInfo)")
+            }
+        }
+    }
 
-}
-
-
-
-
+ 
